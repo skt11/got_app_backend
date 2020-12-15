@@ -15,5 +15,15 @@ router.get("/list", async (_, res) => {
     }
 })
 
+router.get("/count", async (_, res) => {
+    try {
+        const count = await Battle.countDocuments({})
+        res.send({ count })
+    }
+    catch (e) {
+        res.status(500).send({ msg: "Internal server error." })
+    }
+})
+
 
 module.exports = router
