@@ -25,5 +25,23 @@ router.get("/count", async (_, res) => {
     }
 })
 
+router.get("/search", async ({ query }, res) => {
+    try {
+        if (query.king) {
+            query = { $or: [{ atacker_king: query.king }, { defender_king: query.king }], ...query }
+            delete query.king
+        }
+        const battleList = await Battle.find(query)
+        if (battleList.length === 0) {
+            return res.sendStatus(404)
+        }
+        res.send(battleList).status(200)
+    }
+    catch (e) {
+        res.status(500).send({ msg: "Internal server error." })
+    }
+})
+
+
 
 module.exports = router
