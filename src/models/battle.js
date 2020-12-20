@@ -59,10 +59,10 @@ const battleSchema = new mongoose.Schema({
         type: Number
     },
     attacker_commander: {
-        type: Number
+        type: String
     },
     defender_commander: {
-        type: Number
+        type: String
     },
     summer: {
         type: Number
